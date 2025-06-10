@@ -20,8 +20,8 @@ class Visite
     #[ORM\Column(length: 50)]
     private ?string $pays = null;
 
-    #[ORM\Column(type: Types::DATE_MUTABLE, nullable: true)]
-    private ?\DateTime $datecreation = null;
+   /** #[ORM\Column(type: Types::DATE_MUTABLE, nullable: true)]
+    private ?\DateTime $datecreation = null;**/
 
     #[ORM\Column(nullable: true)]
     private ?int $note = null;
@@ -34,7 +34,20 @@ class Visite
 
     #[ORM\Column(nullable: true)]
     private ?int $tempmax = null;
+    
 
+    #[ORM\Column(type: 'datetime')]
+    private \DateTime $datecreation;
+    
+     public function getDatecreationString() : string
+    {
+        if($this->datecreation == null){
+            return "";
+        }else{
+            return $this->datecreation->format('d/m/Y');
+        }
+    }
+    
     public function getId(): ?int
     {
         return $this->id;
