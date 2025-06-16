@@ -7,6 +7,7 @@ use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
+use Symfony\Component\Form\Extension\Core\Type\DateType;
 
 class VisiteType extends AbstractType
 {
@@ -15,9 +16,15 @@ class VisiteType extends AbstractType
         $builder
             ->add('ville')
             ->add('pays')
-            ->add('datecreation', null, [
+            /**->add('datecreation', null, [
                 'widget' => 'single_text',
                 'label' => 'date'
+            ])**/
+            ->add('datecreation', DateType::class, [
+                'widget' => 'single_text',
+                'label' => 'date',
+                'html5' => true,
+                'format' => 'yyyy-MM-dd'
             ])
             ->add('note')
             ->add('avis')
