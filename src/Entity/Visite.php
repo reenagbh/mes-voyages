@@ -3,6 +3,8 @@
 namespace App\Entity;
 
 use App\Repository\VisiteRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 
@@ -38,6 +40,23 @@ class Visite
 
     #[ORM\Column(type: 'datetime')]
     private \DateTime $datecreation;
+
+    #[ORM\Column(length: 100)]
+    private ?string $nom = null;
+
+    /**
+     * @var Collection<int, Environnement>
+     */
+    #[ORM\ManyToMany(targetEntity: Environnement::class)]
+    private Collection $environnements;
+    
+    public function __construct()
+   {
+       $this->datecreation = new \DateTime();
+       $this->environnements = new ArrayCollection();
+       
+   }
+
     
      public function getDatecreationString() : string
     {
@@ -81,14 +100,7 @@ class Visite
     {
         return $this->datecreation;
     }
-    
-   ///
-   public function __construct()
-   {
-       $this->datecreation = new \DateTime();
-       
-   }
-
+   
     public function setDatecreation(?\DateTime $datecreation): static
     {
         $this->datecreation = $datecreation;
@@ -140,6 +152,42 @@ class Visite
     public function setTempmax(?int $tempmax): static
     {
         $this->tempmax = $tempmax;
+
+        return $this;
+    }
+
+    public function getNom(): ?string
+    {
+        return $this->nom;
+    }
+
+    public function setNom(string $nom): static
+    {
+        $this->nom = $nom;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Environnement>
+     */
+    public function getEnvironnements(): Collection
+    {
+        return $this->environnements;
+    }
+
+    public function addEnvironnement(Environnement $environnement): static
+    {
+        if (!$this->environnements->contains($environnement)) {
+            $this->environnements->add($environnement);
+        }
+
+        return $this;
+    }
+
+    public function removeEnvironnement(Environnement $environnement): static
+    {
+        $this->environnements->removeElement($environnement);
 
         return $this;
     }
