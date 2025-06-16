@@ -3,6 +3,7 @@
 namespace App\Form;
 
 use App\Entity\Visite;
+use DateTime;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
@@ -22,10 +23,11 @@ class VisiteType extends AbstractType
             ])**/
             ->add('datecreation', DateType::class, [
                 'widget' => 'single_text',
-                'label' => 'date',
-                'html5' => true,
-                'format' => 'yyyy-MM-dd'
+                'data' => isset($options['data']) && 
+                            $options['data']->getDateCreation() != null ? $options['data']->getDateCreation() : new DateTime('now'),
+                'label' => 'Date'
             ])
+
             ->add('note')
             ->add('avis')
             ->add('tempmin', null, [

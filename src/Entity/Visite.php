@@ -81,6 +81,13 @@ class Visite
     {
         return $this->datecreation;
     }
+    
+   ///
+   public function __construct()
+   {
+       $this->datecreation = new \DateTime();
+       
+   }
 
     public function setDatecreation(?\DateTime $datecreation): static
     {
