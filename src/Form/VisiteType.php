@@ -11,6 +11,9 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\Extension\Core\Type\DateType;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
+use Symfony\Component\Form\Extension\Core\Type\FileType;
+use Symfony\Component\Form\Extension\Core\Type\TextType;
+//use Vich\UploaderBundle\Form\Type\VichImageType;
 
 class VisiteType extends AbstractType
 {
@@ -44,14 +47,21 @@ class VisiteType extends AbstractType
                 'multiple' => true,
                 'required' => false,
             ])
-
+            ->add('imageFile', FileType::class, [
+                'required' => false,
+                'label' => 'Sélection image',
+            ])
+            /**->add('nom', TextType::class, [
+                'label' => 'Nom de la visite',
+                'required' => true
+            ])**/
             ->add('submit', SubmitType::class, [
                 'label' => 'Enregistrer'
             ])
         ;
 
     }
-
+    
     public function configureOptions(OptionsResolver $resolver): void
     {
         $resolver->setDefaults([
