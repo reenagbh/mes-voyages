@@ -12,7 +12,8 @@ use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\Extension\Core\Type\DateType;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\Extension\Core\Type\FileType;
-use Symfony\Component\Form\Extension\Core\Type\TextType;
+//use Symfony\Component\Form\Extension\Core\Type\TextType;
+use Symfony\Component\Form\Extension\Core\Type\IntegerType;
 //use Vich\UploaderBundle\Form\Type\VichImageType;
 
 class VisiteType extends AbstractType
@@ -33,7 +34,12 @@ class VisiteType extends AbstractType
                 'label' => 'Date'
             ])
 
-            ->add('note')
+            ->add('note', IntegerType::class, [
+                'attr' => [
+                    'min' => 0,
+                    'max' => 20
+                ]
+            ])
             ->add('avis')
             ->add('tempmin', null, [
                 'label' => 't° min'

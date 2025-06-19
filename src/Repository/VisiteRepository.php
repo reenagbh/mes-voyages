@@ -30,12 +30,12 @@ class VisiteRepository extends ServiceEntityRepository
                     ->getQuery()
                     ->getResult();
         }else {
-            return $this->createQueryBuilder('v') // alias de la table
+            /**return $this->createQueryBuilder('v') // alias de la table
                     ->where('v.'.$champ.'=:valeur')
                     ->setParameter('valeur', $valeur)
                     ->orderBy('v.datecreation', 'DESC')
                     ->getQuery()
-                    ->getResult();
+                    ->getResult();**/
         }
         
     }
